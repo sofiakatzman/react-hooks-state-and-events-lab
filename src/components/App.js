@@ -3,21 +3,24 @@ import ShoppingList from "./ShoppingList";
 import itemData from "../data/items";
 
 function App() {
-  const [isOn, setIsOn] = useState(false)
+  const [items, setItems] = useState(itemData);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const appClass = isOn ? "App dark" : "App light"
+  function handleDarkModeClick() {
+    setIsDarkMode((isDarkMode) => !isDarkMode);
+  }
 
-  function handleClick(event) {
-    setIsOn(!isOn)
-   }
+  const appClass = isDarkMode ? "App dark" : "App light";
 
-  return (
+   return (
     <div className={appClass}>
       <header>
         <h2>Shopster</h2>
-        <button onClick = {handleClick}>{isOn ? "Light Mode" : "Dark Mode"}</button>
+        <button onClick={handleDarkModeClick}>
+          {isDarkMode ? "Dark" : "Light"} Mode
+        </button>
       </header>
-      <ShoppingList items={itemData} />
+      <ShoppingList items={items} />
     </div>
   );
 }
